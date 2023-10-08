@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-
-const Formulario = ({pacientes,setPacientes}) => {
+import Error from "./error";
+const Formulario = ({ pacientes, setPacientes }) => {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
@@ -8,34 +8,38 @@ const Formulario = ({pacientes,setPacientes}) => {
   const [sintomas, setSintomas] = useState("");
   const [error, setError] = useState(false);
 
+  const generarId=()=>{
+    const random=Math.random().toString(36).substring(2);
+    const fecha=Date.now().toString(36)
+    return random+fecha
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     //validacion del formulario
     if ([nombre, propietario, email, fecha, sintomas].includes("")) {
-      setError(true)
+      setError(true);
       return;
-    } 
-    setError(false)
+    }
+    setError(false);
 
     //objeto paciente
-    const objetoPaciente={
-      nombre, 
+    const objetoPaciente = {
+      nombre,
       propietario,
       email,
       fecha,
-         sintomas
-    }
+      sintomas,
+      id: generarId(),
+    };
     // console.log(objetoPaciente)
-    setPacientes([...pacientes, objetoPaciente])
+    setPacientes([...pacientes, objetoPaciente]);
 
     //Reiniciar el form
-    setNombre('')
-    setPropietario('')
-    setEmail('')
-    setFecha('')
-    setSintomas('')
-    
-
+    setNombre("");
+    setPropietario("");
+    setEmail("");
+    setFecha("");
+    setSintomas("");
 
     // console.log("enviando formulario");
   };
@@ -51,9 +55,9 @@ const Formulario = ({pacientes,setPacientes}) => {
         className="bg-white shadow-md rounded-lg  py-10 px-5 mb-10"
       >
         {error && (
-          <div className="bg-red-800 text-white text-center p-3 uppercase font-bold mb-3 rounded ">
-            <p>Todos lo campo son obligatorios</p>
-          </div>
+          <Error>
+            <p>Todos los campos son obligatorios</p>
+          </Error>
         )}
         <div className="mb-5">
           <label
@@ -141,7 +145,7 @@ const Formulario = ({pacientes,setPacientes}) => {
         </div>
         <input
           type="submit"
-          className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
+          className="bg-indigo-600 w-full p-3 text-white rounded uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
           value="Agregar Paciente"
         />
       </form>
