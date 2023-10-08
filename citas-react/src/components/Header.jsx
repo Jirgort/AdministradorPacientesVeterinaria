@@ -1,4 +1,5 @@
 function Header() {
+ 
   return (
     <div>
       <h1 className="font-black text-5xl text-center md:w-2/2 mx-auto">Seguimiento Pacientes{" "}
