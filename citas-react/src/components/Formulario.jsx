@@ -127,7 +127,7 @@ const Formulario = ({ pacientes, setPacientes ,paciente, setPaciente}) => {
           <input
             id="email"
             type="email"
-            placeholder="Email contacot propietario"
+            placeholder="Email contacto propietario"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
